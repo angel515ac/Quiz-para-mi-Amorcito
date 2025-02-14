@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Sorpresa para Mi Amorcito 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5em;
+        }
+
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        button {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff4757;
+        }
+
+        .error {
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        .success {
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .hexagram {
+            width: 50px;
+            height: 50px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>💖 Hola, mi amorcito 💖</h1>
+    <p>Si logras responder estas preguntas, te espera una hermosa sorpresa. 🎁</p>
+
+    <div class="container">
+        <p><strong>1️⃣ ¿Qué día fue nuestro primer mensaje de WhatsApp?</strong></p>
+        <input type="text" id="q1">
+        <p class="error hidden" id="error1">¡Uy tilín, está mal! Intenta de nuevo. 🥺</p>
+
+        <p><strong>2️⃣ ¿Quién fue el primero en mandar mensaje?</strong></p>
+        <input type="text" id="q2">
+        <p class="error hidden" id="error2">¡Nooo tilín! Vuelve a intentarlo. 🙈</p>
+
+        <p><strong>3️⃣ Angelito asoció una canción con su amorcito, ¿cuál fue?</strong></p>
+        <input type="text" id="q3">
+        <p class="error hidden" id="error3">¡Nop! No es esa, mi amorcito. 🎶</p>
+
+        <p><strong>4️⃣ ¿Qué es lo que más te gusta de Angelito?</strong></p>
+        <input type="text" id="q4">
+        <p class="error hidden" id="error4">No hay respuesta incorrecta, mi amorcito. 💕</p>
+
+        <p><strong>5️⃣ ¿Quién ama más a quién?</strong></p>
+        <input type="text" id="q5">
+        <p class="error hidden" id="error5">¡Uy tilín! Piensa bien. 🥺</p>
+
+        <button onclick="checkAnswers()">Enviar Respuestas</button>
+    </div>
+
+    <div class="success" id="success">
+        <h2>🎉 ¡Felicidades, mi amorcito! 🎉</h2>
+        <p>Lograste responder todo correctamente. Ahora resuelve este acertijo para descubrir tu regalo: 🎁</p>
+        <p><strong>🔍 PISTA: La primera letra de cada canción de la playlist forma un mensaje especial. ¿Qué dice?</strong></p>
+        <input type="text" id="puzzle">
+        <button onclick="checkPuzzle()">Revelar Regalo</button>
+        <p class="error hidden" id="puzzleError">¡Ups! No es eso, intenta de nuevo. 🔍</p>
+    </div>
+
+    <div class="success hidden" id="finalMessage">
+        <h2>💖 Mi amorcito, tengo algo para ti 💖</h2>
+        <p>Estoy tan nervioso que me tiemblan los dedos que están cruzando tu cabello, con esos encantadores labios que están hechos para besarlos, me pones de cabeza, tienes una voz que me deja sin aliento. Si este es el cielo, entonces nena, no quiero saber del infierno. ❤️</p>
+        <p>Y aquí está tu regalo con mucho amor: 🎁</p>
+        <a href="https://open.spotify.com/playlist/60XoAmB2zVMWHe3bYVE4HZ?si=76a0f86b51a844b5&pt=4dd680e7c147d63506d3c64d83cfcb1d" target="_blank">🎵 Escuchar Playlist 🎵</a>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const answers = {
+                q1: "17 de diciembre",
+                q2: "Angelito",
+                q3: "Dummy",
+                q4: "Cualquier respuesta es correcta",
+                q5: "Angelito a March"
+            };
+
+            let correct = true;
+            
+            for (let i = 1; i <= 5; i++) {
+                let input = document.getElementById(`q${i}`).value.trim();
+                let error = document.getElementById(`error${i}`);
+                if (i === 4 || input.toLowerCase() === answers[`q${i}`].toLowerCase()) {
+                    error.classList.add("hidden");
+                } else {
+                    error.classList.remove("hidden");
+                    correct = false;
+                }
+            }
+
+            if (correct) {
+                document.querySelector(".container").style.display = "none";
+                document.getElementById("success").style.display = "block";
+            }
+        }
+
+        function checkPuzzle() {
+            let puzzleAnswer = document.getElementById("puzzle").value.trim().toLowerCase();
+            if (puzzleAnswer === "quieres ser mi novia") {
+                document.getElementById("success").style.display = "none";
+                document.getElementById("finalMessage").style.display = "block";
+            } else {
+                document.getElementById("puzzleError").classList.remove("hidden");
+            }
+        }
+    </script>
+
+</body>
+</html>
